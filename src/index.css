@@ -5,4 +5,11 @@
 
 body {
   margin: 1em;
+  background: #50808E;
+}
+.viewHeight {
+  min-height: 100vh
+}
+.background {
+  color: #50808E;
 }
