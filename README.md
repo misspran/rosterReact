@@ -1,5 +1,3 @@
-# Alchemy React Test
-
 ## Game Management Platform
 
 
