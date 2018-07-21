@@ -1,18 +1,7 @@
 # Alchemy React Test
 
-## Background
-The engineering team at Alchemy has built an (imaginary) game management platform.
-The platform has an API that allows you to create a manager(user) that allows them 
-to manage player rosters for their chosen sport.
+## Game Management Platform
 
-## Your Mission
-Build a user interface you'll want to brag about.
-The game you choose is up to you. Office Ping-Pong, soccer, football, quidditch, or professional netflix binging.
-Read all of the instructions for great success.
-
-## Pre-Requirements
-- Have Node v8+ installed on your system
-- An editor/IDE that brings you joy
 
 ## Required User Stories
 - As a user when I navigate to '/' then I should see a home page with login and registration links.
