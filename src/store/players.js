@@ -10,14 +10,7 @@ const remove = id => ({ type: DELETE_PLAYER, id });
 
 let token = localStorage.getItem('Authorization');
 token = 'Bearer '.concat(token);
-const config =  { 'Content-Type': 'application/json', Authorization: token };
-axios.defaults.headers.common['Authorization'] = token;
-axios.defaults.headers.get['Content-Type'] = 'application/json';
-
- console.log(axios.defaults.headers)
-
-fetchPlayers()
-
+const config = { 'Content-Type': 'application/json', Authorization: token };
 
 export default function reducer(players = [], action) {
   switch (action.type) {
@@ -35,16 +28,21 @@ export default function reducer(players = [], action) {
 export const fetchPlayers = () => async (dispatch) => {
   let res;
   try { 
-    await axios.get('https://players-api.developer.alchemy.codes/api/players', { headers: config });
+    let instance = axios.create();
+    instance.defaults.headers.common = {};
+    instance.defaults.headers.common['Authorization'] = token;
+    instance.defaults.headers.post['Content-Type'] = 'application/json';
+    instance.defaults.headers.get['Content-Type'] = 'application/json';
+    await console.log(instance.defaults.headers)
+    await instance.get('https://players-api.developer.alchemy.codes/api/players');
     await console.log(res.data, 'data');
-    dispatch(fetch(res.data));
+    //dispatch(fetch(res.data));
   } catch (err) {
     console.error('Fetching players unsuccesful.', err);
   }
 
 };
 
-fetchPlayers()
 // export const fetchPlayers  = () => (dispatch) => {
 //   return axios({
 //     method: 'get',

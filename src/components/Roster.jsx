@@ -18,8 +18,6 @@ class Roster extends React.Component {
       localStorage.setItem('Authorization', this.props.user.token )
       let token = this.props.user.token;
       token = 'Bearer '.concat(token);
-      axios.defaults.headers.common['Authorization'] = token;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
       
       this.props.fetchPlayers()
     }
@@ -35,17 +33,17 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
         header='No players loaded.'
         content='Add players to your roster bellow. '
       />
-        <Table color="violet" row selectable>
-          <Table.Header fullWidth >
+        <Table color="violet" row="true" selectable>
+          <Table.Header fullwidth="true" >
             <Table.Row>
-              <Table.HeaderCell key="name" fullWidth>Name</Table.HeaderCell>
+              <Table.HeaderCell key="name" fullwidth="true">Name</Table.HeaderCell>
               <Table.HeaderCell key="rating">Rating</Table.HeaderCell>
               <Table.HeaderCell key="handleness">Handedness</Table.HeaderCell>
             </Table.Row>
           </Table.Header >
             <Table.Body>
             </Table.Body>
-          <Table.Footer fullWidth>
+          <Table.Footer fullwidth="true">
             <Table.Row>
               <Table.HeaderCell colSpan='4'>
                 <AddPlayer/>
