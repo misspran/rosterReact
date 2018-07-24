@@ -111,8 +111,8 @@ class Register extends React.Component {
                   placeholder="Confirm password"
                   name="confirm_password"
                   type="password"
-                  onKeyUp={this.handleChange}
-                  onBlur={this.errorWarning}
+                  onChange={this.handleChange}
+                  onKeyUp={this.errorWarning}
                   error={this.state.error.warning}
                   required
                 />
