@@ -9,7 +9,7 @@ const Navbar = ({ handleClick, userName }) => (
       <Image src="https://image.flaticon.com/icons/png/128/199/199780.png" style={{ height: '40px', width: '40px' }} />
     </Menu.Item>
     <Menu.Item name="title">
-       Welcome back { userName }, time to roster it up!
+      { userName ? `Welcome back ${userName.user.user.first_name}, time to roster it up!` : 'Possible error'}
     </Menu.Item>
     <Menu.Menu position="right">
       <Menu.Item
@@ -22,7 +22,7 @@ const Navbar = ({ handleClick, userName }) => (
 
 const mapState = (state) => {
   return {
-    userName: state.user.user.first_name,
+    userName: state,
   };
 };
 

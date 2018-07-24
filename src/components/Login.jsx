@@ -53,14 +53,13 @@ const mapLogin = (state) => {
   };
 };
 
-const mapDispatch =  (dispatch) => {
+const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(login(email, password));
-      
+      dispatch(login(email, password)); 
     },
   };
 };

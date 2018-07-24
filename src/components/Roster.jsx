@@ -13,17 +13,19 @@ class Roster extends React.Component {
     this.state = {}
   
   }
+
   componentDidMount = () =>{
-    if(this.props.user.success === true){
+    if(this.props.user.token){
       localStorage.setItem('Authorization', this.props.user.token )
       let token = this.props.user.token;
       token = 'Bearer '.concat(token);
       
-      this.props.fetchPlayers()
+      this.props.fetchPlayers(token)
     }
   }
   
   render () {
+    console.log
     
     const players = this.props.players.players
     return (
@@ -58,7 +60,12 @@ class Roster extends React.Component {
   }
 };
 
-const mapState = ({ user, players }) => ({ user, players });
+const mapState = (state) => {
+  return {
+    user: state.user,
+    players: state.players
+  }
+};
 
 const mapDispatch = { fetchPlayers, addPlayer, deletePlayer  };
 

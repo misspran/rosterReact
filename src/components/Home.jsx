@@ -1,13 +1,26 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Roster from './Roster';
+import { connect } from 'react-redux';
+import Login from './Login';
 
-const Home = () => (
+const Home = ({isLoggedIn}) =>  (
   <div>
-    <Navbar />
-    <Roster />
-    <h2>Home</h2>
+    {isLoggedIn ? 
+      <div>
+        <Navbar />
+        <Roster />
+      </div> : <Login /> }  
   </div>
 );
 
-export default Home;
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.success,
+  }
+}
+
+const mapDispatch = null
+
+
+export default connect(mapState, mapDispatch)(Home);

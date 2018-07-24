@@ -16,9 +16,9 @@ class AddPlayer extends Component {
 
   }
   handlePlayerSubmit = () => {
-    const { playerSubmit } = this.props;
+    
     console.log(this.state)
-    playerSubmit(this.state)
+    this.props.addPlayer(this.state, this.props.user.token)
     
 
   }
@@ -31,7 +31,7 @@ render() {
           <Button floated='right' icon labelPosition='left' primary size='small'>
           <Icon name='user plus' /> Add Player
           </Button>
-        }>
+        } closeIcon>
     <Modal.Header>Add Player</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src='https://png.icons8.com/color/1600/table-tennis.png' />
@@ -40,11 +40,11 @@ render() {
         top: '20%'
       }}>
       <Form.Group widths='equal'>
-        <Form.Input stretch label='First name' type='first_name' placeholder='First name' value={this.state.first_name} onChange={evt => this.setState({ first_name: evt.target.value})} required/>
-        <Form.Input stretch label='Last name' type='last_name' placeholder='Last name' onChange={evt => this.setState({ last_name: evt.target.value})} required/>
+        <Form.Input stretch="true" label='First name' type='first_name' placeholder='First name' value={this.state.first_name} onChange={evt => this.setState({ first_name: evt.target.value})} required/>
+        <Form.Input stretch="true" label='Last name' type='last_name' placeholder='Last name' onChange={evt => this.setState({ last_name: evt.target.value})} required/>
       </Form.Group>
       <Form.Group>
-      <Form.Input stretch label='Rating' type='rating' placeholder='Rating' onChange={evt => this.setState({ rating: evt.target.value })}/>
+      <Form.Input stretch="true" label='Rating' type='rating' placeholder='Rating' onChange={evt => this.setState({ rating: evt.target.value })}/>
       </Form.Group>
       <Form.Group inline>
         <label>Handedness</label>
@@ -83,17 +83,17 @@ render() {
       )
     }
   }
-const mapState = () => ({ message: 'Add Player' });
+const mapState = ({user, players}) => ({ user, players});
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = { addPlayer }
   
-  return {
-    playerSubmit: (playerDetail) => {
-      let player = {first_name: playerDetail.first_name, last_name: playerDetail.last_name, rating: playerDetail.rating, handedness: playerDetail.handedness};
-      dispatch(addPlayer(player));
-    }
-  }
-};
+//   return {
+//     playerSubmit: (playerDetail, token) => {
+//       let player = {first_name: playerDetail.first_name, last_name: playerDetail.last_name, rating: playerDetail.rating, handedness: playerDetail.handedness};
+//       dispatch(addPlayer(player, token));
+//     }
+//   }
+// };
 
   
 export default connect(mapState, mapDispatch)(AddPlayer);

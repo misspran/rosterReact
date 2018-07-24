@@ -14,16 +14,12 @@ export const login = (email, password) => async (dispatch) => {
   let res;
   try {
     res = await axios.post('https://players-api.developer.alchemy.codes/api/login', { email, password });
-  } catch (err) {
-    return dispatch(loginUser({ error: err }));
-  }
-  try {
+    await localStorage.setItem('Authorization', res.data.token);
     await console.log(res.data, 'that data');
     await dispatch(loginUser(res.data));
-    await localStorage.setItem('Authorization', res.data.token);
     history.push('/home');
-  } catch (dispatchOrHistoryErr) {
-    console.error(dispatchOrHistoryErr);
+  } catch (err) {
+    return dispatch(loginUser({ error: err }));
   }
 };
 
@@ -31,8 +27,8 @@ export const logout = () => async (dispatch) => {
   try {
     await history.push('/');
     await dispatch(logoutUser());
-    delete axios.defaults.headers;
-    delete axios.defaults.headers.common;
+    //delete axios.defaults.headers;
+    //delete axios.defaults.headers.common;
     localStorage.removeItem('Authorization');
     dispatch(logoutUser());
   } catch (err) {

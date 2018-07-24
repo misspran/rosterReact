@@ -1,6 +1,7 @@
 const isDev = process.env.NODE_ENV === 'development';
+const path = require('path');
 
-module.exports = {
+const config = {
   mode: isDev ? 'development' : 'production',
   entry: [
     '@babel/polyfill',
@@ -25,7 +26,13 @@ module.exports = {
   },
   devServer: {
     proxy: { // proxy URLs to backend development server
-      '/api': 'https://players-api.developer.alchemy.codes/',
+      '/api*': {
+        target: 'https://players-api.developer.alchemy.codes/',
+        secure: false,
+      },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
     },
     contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location
     compress: true, // enable gzip compression
@@ -35,4 +42,6 @@ module.exports = {
     noInfo: true, // only errors & warns on hot reload
     // ...
   },
-}
+};
+
+module.exports = config;

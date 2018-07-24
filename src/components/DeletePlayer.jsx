@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon, Modal, Header, Image, Table } from 'semantic-ui-react';
+import { Button, Icon, Modal, Header, Image, Table, Footer } from 'semantic-ui-react';
 import { deletePlayer } from '../store/players';
 import AddPlayer from './AddPlayer'
 
@@ -10,6 +10,26 @@ const inlineStyle = {
   },
 };
 
+// const ModalWarning = () => (
+//   <Modal trigger={<Button icon labelPosition='left' primary size='medium'>
+//   <Icon name='user plus' /> Delete Player
+//   </Button>} closeIcon>
+//     <Modal.Header>Delete</Modal.Header>
+//     <Modal.Content image>
+//       <div className='image'>
+//         <Icon name='user delete' />
+//       </div>
+//       <Modal.Description>
+//         <p>This player have been deleted.</p>
+//       </Modal.Description>
+//     </Modal.Content>
+//     <Modal.Actions>
+//     <Button icon='check' content='Back to Roster' />
+//   </Modal.Actions>
+//   </Modal>
+// )
+
+
 class DeletePlayer extends Component {
   constructor (props){
     super (props);
@@ -17,21 +37,28 @@ class DeletePlayer extends Component {
 
   }
   deletePlayerSubmit = () => {
-    const { playerSubmit } = this.props;
-    removePlayerSubmit(this.state.id)
-    console.log(this.state)
+    if(this.props.user.token){
+      const { removePlayerSubmit } = this.props;
+      console.log(this.props.user.token)
+      let token = 'Bearer '.concat(this.props.user.token)
+      console.log(token)
+      removePlayerSubmit(this.state.id, token)
+      this.setState({id: null, modalOpen: false})
+      
+    }
 
   }
   handleRadioChange = (e, { value }) => this.setState({ handedness: value })
 
 render() {
+  console.log(this.state)
     const {players} = this.props
       return (
         <div style={{padding: '0% 0% 0%'}}>
-        <Table color="violet" row selectable>
-        <Table.Header fullWidth >
-      <Table.Row>
-        <Table.HeaderCell key="name" fullWidth>Name</Table.HeaderCell>
+        <Table color="violet" row="true" selectable>
+        <Table.Header fullwidth="true" >
+      <Table.Row key="tableHeader">
+        <Table.HeaderCell key="name" fullwidth="true">Name</Table.HeaderCell>
         <Table.HeaderCell key="rating">Rating</Table.HeaderCell>
         <Table.HeaderCell key="handleness">Handedness</Table.HeaderCell>
       </Table.Row>
@@ -39,7 +66,7 @@ render() {
     <Table.Body>
         
         {players.players.map( player => (
-        <Modal style={inlineStyle.modal} trigger={<Table.Row key={player.id} value={player.id} onClick={()=> this.setState({id: player.id})}>
+        <Modal key={player.id} style={inlineStyle.modal} trigger={<Table.Row key={player.id} value={player.id} onClick={()=> this.setState({id: player.id, modalOpen:true})} closeicon="true" open={this.state.modalOpen}>
 
         <Table.Cell  key={player.first_name + player.last_name}>{player.first_name} {player.last_name}</Table.Cell>
         <Table.Cell key={player.rating}>{player.rating}</Table.Cell>
@@ -63,7 +90,7 @@ render() {
   </Modal>
 ))}
 </Table.Body>
-<Table.Footer fullWidth>
+<Table.Footer fullwidth="true">
     <Table.Row>
       <Table.HeaderCell colSpan='4'>
       <AddPlayer/>
@@ -76,14 +103,13 @@ render() {
     }
   }
 
+
 const mapState = ({ user, players }) => ({ user, players });
 
 const mapDispatch = (dispatch) => {
-  
   return {
-    removePlayerSubmit: (id) => {
-      dispatch(deletePlayer(id));
-    }
+    removePlayerSubmit: (id, token) => 
+      dispatch(deletePlayer(id, token))
   }
 };
 

@@ -16,7 +16,6 @@ export default function reducer(users = [], action) {
 }
 
 export const createUser = user => async (dispatch) => {
-  console.log(user)
   let res;
   try {
     await axios.post('https://players-api.developer.alchemy.codes/api/user', user);
