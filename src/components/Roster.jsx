@@ -11,6 +11,7 @@ class Roster extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
+    this.players = this.props.players
   
   }
 
@@ -48,7 +49,7 @@ class Roster extends React.Component {
           <Table.Footer fullwidth="true">
             <Table.Row>
               <Table.HeaderCell colSpan='4'>
-                <AddPlayer/>
+                <AddPlayer {...this.props}/>
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer> 

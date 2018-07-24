@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Modal, Header, Image, Table, Footer } from 'semantic-ui-react';
-import { deletePlayer } from '../store/players';
+import { deletePlayer } from '../store';
 import AddPlayer from './AddPlayer'
 
 const inlineStyle = {
@@ -42,8 +42,8 @@ class DeletePlayer extends Component {
       console.log(this.props.user.token)
       let token = 'Bearer '.concat(this.props.user.token)
       console.log(token)
-      removePlayerSubmit(this.state.id, token)
-      this.setState({id: null, modalOpen: false})
+      this.props.deletePlayer(this.state.id, token)
+      this.setState({modalOpen: false})
       
     }
 
@@ -106,12 +106,7 @@ render() {
 
 const mapState = ({ user, players }) => ({ user, players });
 
-const mapDispatch = (dispatch) => {
-  return {
-    removePlayerSubmit: (id, token) => 
-      dispatch(deletePlayer(id, token))
-  }
-};
+const mapDispatch = {deletePlayer};
 
   
 export default connect(mapState, mapDispatch)(DeletePlayer);

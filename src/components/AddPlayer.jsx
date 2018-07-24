@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Modal, Header, Image, Form, Checkbox } from 'semantic-ui-react';
-import { addPlayer } from '../store/players';
+import { addPlayer } from '../store';
 
 const inlineStyle = {
   modal: {
@@ -86,14 +86,6 @@ render() {
 const mapState = ({user, players}) => ({ user, players});
 
 const mapDispatch = { addPlayer }
-  
-//   return {
-//     playerSubmit: (playerDetail, token) => {
-//       let player = {first_name: playerDetail.first_name, last_name: playerDetail.last_name, rating: playerDetail.rating, handedness: playerDetail.handedness};
-//       dispatch(addPlayer(player, token));
-//     }
-//   }
-// };
 
   
 export default connect(mapState, mapDispatch)(AddPlayer);

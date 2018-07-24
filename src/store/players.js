@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+require('babel-polyfill');
+
 const FETCH_PLAYERS = 'FETCH_PLAYERS';
 const CREATE_PLAYER = 'CREATE_PLAYER';
 const DELETE_PLAYER = 'DELETE_PLAYER';
@@ -7,22 +9,12 @@ const DELETE_PLAYER = 'DELETE_PLAYER';
 const fetch = players => ({ type: FETCH_PLAYERS, players });
 const create = player => ({ type: CREATE_PLAYER, player });
 const remove = id => ({ type: DELETE_PLAYER, id });
-
-export default function reducer(players = [], action) {
-  switch (action.type) {
-    case FETCH_PLAYERS:
-      return action.players;
-    case CREATE_PLAYER:
-      return [action.player, ...players];
-    case DELETE_PLAYER:
-      return players.filter(player => player.id !== action.id);
-    default:
-      return players;
-  }
-}
+const intitialState = [];
+const arr = [1, 2, 3]
+const arrb = [4, ...arr];
+console.log(arr, arrb);
 
 export const fetchPlayers = token => (dispatch) => {
-  console.log(token);
   if (token) {
     return axios({
       method: 'GET',
@@ -50,10 +42,7 @@ export const addPlayer = (player, token) => dispatch => axios({
     Authorization: 'Bearer '.concat(token),
   },
 })
-  .then((res) => {
-    console.log(res.data, '<<<<<');
-    dispatch(create(res.data.player));
-  })
+  .then(res => dispatch(create(res.data.player)))
   .catch(err => console.error('Adding player unsuccesful.', err));
 
 export const deletePlayer = (id, token) => dispatch => axios({
@@ -68,7 +57,19 @@ export const deletePlayer = (id, token) => dispatch => axios({
   },
 })
   .then((res) => {
-    console.log(res, id, '<<<<<print');
     if (res.data.success === true) dispatch(remove(id));
   })
   .catch(err => console.error('Deleting player unsuccesful.', err));
+
+export default function reducer(players = intitialState, action) {
+  switch (action.type) {
+    case FETCH_PLAYERS:
+      return action.players;
+    case CREATE_PLAYER:
+      return [...players, action.player];
+    case DELETE_PLAYER:
+      return players.filter(player => player.id !== action.id);
+    default:
+      return players;
+  }
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from '../history';
-
+require('babel-polyfill');
 
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';

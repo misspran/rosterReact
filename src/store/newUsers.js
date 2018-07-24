@@ -19,6 +19,7 @@ export const createUser = user => async (dispatch) => {
   let res;
   try {
     await axios.post('https://players-api.developer.alchemy.codes/api/user', user);
+    await console.log(res, '<<<<')
     await dispatch(create(res.data));
     await dispatch(login({ email: user.email, password: user.password }));
     history.push('/home');
