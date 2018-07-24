@@ -25,6 +25,7 @@ class AddPlayer extends Component {
     this.setState({modal:false})
     
     
+    
 
   }
   handleOpen = () => this.setState({modal: true})
@@ -49,7 +50,7 @@ render() {
         top: '20%'
       }}>
       <Form.Group widths='equal'>
-        <Form.Input stretch="true" label='First name' type='first_name' placeholder='First name' value={this.state.first_name} onChange={evt => this.setState({ first_name: evt.target.value})} required/>
+        <Form.Input stretch="true" label='First name' type='first_name' placeholder='First name' value={this.state.first_name} onChange={evt => this.setState({ first_name: evt.target.value})} required />
         <Form.Input stretch="true" label='Last name' type='last_name' placeholder='Last name' onChange={evt => this.setState({ last_name: evt.target.value})} required/>
       </Form.Group>
       <Form.Group>

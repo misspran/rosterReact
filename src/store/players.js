@@ -7,6 +7,8 @@ const FETCH_PLAYERS = 'FETCH_PLAYERS';
 const CREATE_PLAYER = 'CREATE_PLAYER';
 const DELETE_PLAYER = 'DELETE_PLAYER';
 
+const CORSWorkAround = 'https://cors-anywhere.herokuapp.com/';
+
 const fetch = players => ({ type: FETCH_PLAYERS, players });
 const create = player => ({ type: CREATE_PLAYER, player });
 const remove = id => ({ type: DELETE_PLAYER, id });
@@ -16,7 +18,7 @@ export const fetchPlayers = token => (dispatch) => {
   if (token) {
     return axios({
       method: 'GET',
-      url: 'https://cors-anywhere.herokuapp.com/https://players-api.developer.alchemy.codes/api/players',
+      url: `${CORSWorkAround}https://players-api.developer.alchemy.codes/api/players`,
       headers: {
         Accept: 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -25,14 +27,14 @@ export const fetchPlayers = token => (dispatch) => {
       },
     })
       .then(res => dispatch(fetch(res.data.players)))
-      .then(res=> console.log(res))
+      .then(res => console.log(res))
       .catch(err => console.error('Unsuccesful', err));
   }
 };
 
 export const addPlayer = (player, token) => dispatch => axios({
   method: 'POST',
-  url: 'https://cors-anywhere.herokuapp.com/https://players-api.developer.alchemy.codes/api/players',
+  url: `${CORSWorkAround}https://players-api.developer.alchemy.codes/api/players`,
   data: player,
   headers: {
     Accept: 'application/json',
@@ -46,7 +48,7 @@ export const addPlayer = (player, token) => dispatch => axios({
 
 export const deletePlayer = (id, token) => dispatch => axios({
   method: 'DELETE',
-  url: `https://cors-anywhere.herokuapp.com/https://players-api.developer.alchemy.codes/api/players/${id}`,
+  url: `${CORSWorkAround}https://players-api.developer.alchemy.codes/api/players/${id}`,
   data: id,
   headers: {
     Accept: 'application/json',

@@ -6,6 +6,8 @@ import { login } from '../store';
 
 const Login = (props) => {
   const { handleSubmit, error } = props;
+
+
   return (
     <div>
       <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
@@ -23,6 +25,7 @@ const Login = (props) => {
                 name="email"
                 type="text"
                 required
+                error={error}
               />
               <Form.Input
                 fluid
@@ -32,12 +35,18 @@ const Login = (props) => {
                 name="password"
                 type="password"
                 required
+                error={error}
               />
               <Button color="violet" className="button" fluid size="large" type="submit">
                 Login
               </Button>
             </Segment>
           </Form>
+          { error ? <Message
+            error={error}
+            header="Problem with Login"
+            content="Invalid email or password. Please create account if you're not yet a user."
+          /> : <div />}
           <Message>
             Don't have an account? <Link to="/register"> Sign Up!</Link>
           </Message>
@@ -47,22 +56,18 @@ const Login = (props) => {
   );
 };
 
-const mapLogin = (state) => {
-  return {
+const mapLogin = (state) => ({
     error: state.user.error,
-  };
-};
+  });
 
-const mapDispatch = (dispatch) => {
-  return {
+const mapDispatch = (dispatch) => ({
     handleSubmit(evt) {
       evt.preventDefault();
       const email = evt.target.email.value;
       const password = evt.target.password.value;
       dispatch(login(email, password)); 
     },
-  };
-};
+  });
 
 export default connect(mapLogin, mapDispatch)(Login);
 
