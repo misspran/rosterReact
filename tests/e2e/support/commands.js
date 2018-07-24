@@ -20,7 +20,7 @@ Cypress.Commands.add('login', () => {
     'fixture:getPlayers.json',
   );
   cy.visit('/login');
-  cy.get('#email').type('billybob@example.com');
-  cy.get('#password').type('abc123');
-  cy.get('#login').click();
+  cy.get('input[name="email"]').type('billybob@example.com');
+  cy.get('input[name="password"]').type('abc123');
+  cy.get('button[type="submit"]').click();
 });

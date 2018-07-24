@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build-client": "NODE_ENV=development webpack",
-    "build-client-watch": "webpack -w",
-    "build-semantic": "cd src/semantic && gulp build-css build-assets",
-    "watch-semantic": "cd src/semantic && yarn run build-semantic && gulp watch",
     "start": "cross-env NODE_ENV=development parcel src/index.html -p 3000",
     "build": "cross-env NODE_ENV=production parcel build index.html --public-url && webpack",
     "e2e": "cypress open",
@@ -17,6 +13,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
+    "chai": "^4.1.2",
     "cross-env": "^5.2.0",
     "cypress": "^3.0.2",
     "history": "^4.7.2",
