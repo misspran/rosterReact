@@ -13,11 +13,13 @@ class Register extends React.Component {
 
   constructor(props) {
     super(props);
-      this.state = {}; 
+      this.state = {
+        error: {message:"", warning: false}
+      }; 
   }
 
   onSignupSubmit = async (evt) => {
-    event.preventDefault();
+    evt.preventDefault();
     console.log(this.state)
     const { signupSubmit, loginSubmit } = this.props;
     const firstName = evt.target.first_name.value;
@@ -30,9 +32,29 @@ class Register extends React.Component {
    history.push('/home');
 
   }
+  errorWarning = () =>{
+    if(this.state.password === this.state.confirm_password){
+      this.setState({error: {message: "", warning: false}})
+    }else{
+      this.setState({error: {message: "Confirmed password must match password", warning: true}})
+
+    }
+
+  }
+  
+  handleChange = (event) => {
+  
+    this.setState({confirm_password: event.target.value});
+   this.errorWarning()
+    
+
+    console.log(this.state, event)
+  }
+  
+
 
   render() {
-    
+    console.log(this.state)
     return (
       <div >
         <Grid textAlign="center" style={{ height: '100%'}} verticalAlign="middle">
@@ -49,7 +71,7 @@ class Register extends React.Component {
                   placeholder="First name"
                   name="first_name"
                   type="first_name"
-                  onChange={evt=> this.setState()}
+                  onChange={evt=> this.setState({first_name: evt.target.value})}
                   required
                 />
                 <Form.Input
@@ -59,6 +81,7 @@ class Register extends React.Component {
                   placeholder="Last name"
                   name="last_name"
                   type="last_name"
+                  onChange={evt=> this.setState({last_name: evt.target.value})}
                   required
                 />
                 <Form.Input
@@ -68,6 +91,7 @@ class Register extends React.Component {
                   placeholder="E-mail address"
                   name="email"
                   type="email"
+                  onChange={evt=> this.setState({email: evt.target.value})}
                   required
                 />
                 <Form.Input
@@ -77,6 +101,7 @@ class Register extends React.Component {
                   placeholder="Password"
                   name="password"
                   type="password"
+                  onChange={evt=> this.setState({password: evt.target.value})}
                   required
                 />
                 <Form.Input
@@ -86,13 +111,21 @@ class Register extends React.Component {
                   placeholder="Confirm password"
                   name="confirm_password"
                   type="password"
+                  onKeyUp={this.handleChange}
+                  onBlur={this.errorWarning}
+                  error={this.state.error.warning}
                   required
                 />
-                <Button color="violet" className="button" fluid size="large" type="submit">
+                <Button color="violet" className="button" fluid size="large" type="submit" disabled={this.state.error.warning}>
                   Submit
                 </Button>
               </Segment>
             </Form>
+            <Message
+            error={this.state.error.warning}
+            header='Cannot Submit'
+            content={this.state.error.message}
+            />
             <Message>
               Already have an account? <Link to="/login"> Login!</Link>
             </Message>

@@ -4,7 +4,7 @@ import Roster from './Roster';
 import { connect } from 'react-redux';
 import Login from './Login';
 
-const Home = ({isLoggedIn}) =>  (
+const Home = ({ isLoggedIn }) => (
   <div>
     {isLoggedIn ? 
       <div>
