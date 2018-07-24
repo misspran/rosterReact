@@ -1,7 +1,7 @@
 import React from 'react';
 import history from '../history';
 import { Link } from 'react-router-dom';
-import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Segment, Message, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import store from '../store';
 import { createUser } from '../store/newUsers';
@@ -29,7 +29,7 @@ class Register extends React.Component {
     const confirmPassword = evt.target.confirm_password.value;
    await signupSubmit(firstName, lastName, email, password, confirmPassword)
    await loginSubmit(email, password)
-   history.push('/home');
+   history.push('/roster');
 
   }
   errorWarning = () =>{
@@ -58,7 +58,7 @@ class Register extends React.Component {
     return (
       <div >
         <Grid textAlign="center" style={{ height: '100%'}} verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
+          <Grid.Column style={{ maxWidth: 500 }}>
             <Header as="h2" color="violet" textAlign="center">
               Register here!
             </Header>
@@ -66,21 +66,22 @@ class Register extends React.Component {
               <Segment stacked>
                 <Form.Input
                   fluid
-                  icon="user"
-                  iconPosition="left"
-                  placeholder="First name"
+                  label="First Name"
+                  placeholder="First Name"
                   name="first_name"
-                  type="first_name"
+                  type="text"
                   onChange={evt=> this.setState({first_name: evt.target.value})}
                   required
                 />
+                
                 <Form.Input
                   fluid
                   icon="user"
                   iconPosition="left"
-                  placeholder="Last name"
+                  label="Last Name"
+                  placeholder="Last Name"
                   name="last_name"
-                  type="last_name"
+                  type="text"
                   onChange={evt=> this.setState({last_name: evt.target.value})}
                   required
                 />
@@ -88,7 +89,8 @@ class Register extends React.Component {
                   fluid
                   icon="envelope outline"
                   iconPosition="left" 
-                  placeholder="E-mail address"
+                  label="Email"
+                  placeholder="E-mail Address"
                   name="email"
                   type="email"
                   onChange={evt=> this.setState({email: evt.target.value})}
@@ -98,6 +100,7 @@ class Register extends React.Component {
                   fluid
                   icon="lock"
                   iconPosition="left"
+                  label="Password"
                   placeholder="Password"
                   name="password"
                   type="password"
@@ -108,7 +111,8 @@ class Register extends React.Component {
                   fluid
                   icon="lock"
                   iconPosition="left"
-                  placeholder="Confirm password"
+                  label="Confirm Password"
+                  placeholder="Confirm Password"
                   name="confirm_password"
                   type="password"
                   onChange={this.handleChange}
@@ -121,11 +125,11 @@ class Register extends React.Component {
                 </Button>
               </Segment>
             </Form>
-            <Message
+            {this.state.error.warning? <Message
             error={this.state.error.warning}
             header='Cannot Submit'
             content={this.state.error.message}
-            />
+            />: <div />}
             <Message>
               Already have an account? <Link to="/login"> Login!</Link>
             </Message>

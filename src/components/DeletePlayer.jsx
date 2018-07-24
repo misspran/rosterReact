@@ -47,7 +47,7 @@ render() {
         {players.map( player => (
         <Modal key={player.id} style={inlineStyle.modal} trigger={<Table.Row key={player.id} value={player.id} onClick={()=> this.setState({id: player.id, modalOpen:!this.state.modalOpen})} closeicon="true" open={this.state.modalOpen}>
 
-        <Table.Cell  key={player.first_name + player.last_name}>{player.first_name} {player.last_name}</Table.Cell>
+        <Table.Cell  key={player.first_name + player.last_name} name="name">{player.first_name} {player.last_name}</Table.Cell>
         <Table.Cell key={player.rating}>{player.rating}</Table.Cell>
         <Table.Cell key={player.handedness}>{player.handedness}</Table.Cell>
         </Table.Row>}>
@@ -62,7 +62,7 @@ render() {
       
     </Modal.Content>
     <Modal.Actions>
-    <Button icon labelPosition='left' primary size='medium' onClick={this.deletePlayerSubmit}>
+    <Button icon labelPosition='left' primary size='medium' onClick={this.deletePlayerSubmit} type="delete">
     <Icon name='user plus' /> Delete Player
     </Button>
     </Modal.Actions>

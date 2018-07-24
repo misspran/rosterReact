@@ -2,9 +2,8 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from './Login';
-import Home from './Home';
-import Register from './Register';
 import Roster from './Roster';
+import Register from './Register';
 import AddPlayer from './AddPlayer';
 import { fetchPlayers } from '../store';
 
@@ -19,11 +18,11 @@ class Routes extends React.Component {
   render() {
     return (
       <main>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Roster} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/home" component={Home} />
-        <Route path="/roster" component={Roster} />
+        <Route path="/home" component={Roster} />
+        <Route exact path="/roster" component={Roster} />
         <Route path="/player/new" component={AddPlayer} />
       </main>);
   }

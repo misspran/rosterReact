@@ -1,73 +1,26 @@
 import React from 'react';
-import axios from 'axios';
+import Navbar from './Navbar';
+import RosterTable from './RosterTable';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import TableBody, { Table, Button, Icon, Message } from 'semantic-ui-react';
-import { fetchPlayers, addPlayer, deletePlayer } from '../store';
-import AddPlayer from './AddPlayer'
-import DeletePlayer from './DeletePlayer'
+import Login from './Login';
 
-class Roster extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-    this.players = this.props.players
-  
-  }
-
-  componentDidMount = () =>{
-    if(this.props.user.token){
-      localStorage.setItem('Authorization', this.props.user.token )
-      let token = this.props.user.token;
-      token = 'Bearer '.concat(token);
-      
-      this.props.fetchPlayers(token)
-    }
-  }
-  
-  render () {
-    console.log(this.props)
-    
-    const players = this.props.players
-    return (
-      <div style={{padding: '1% 1% 1%'}}>
-      {players? <DeletePlayer />: <div>
-        <Message
-        header='No players loaded.'
-        content='Add players to your roster bellow. '
-      />
-        <Table color="violet" row="true" selectable>
-          <Table.Header fullwidth="true" >
-            <Table.Row>
-              <Table.HeaderCell key="name" fullwidth="true">Name</Table.HeaderCell>
-              <Table.HeaderCell key="rating">Rating</Table.HeaderCell>
-              <Table.HeaderCell key="handleness">Handedness</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header >
-            <Table.Body>
-            </Table.Body>
-          <Table.Footer fullwidth="true">
-            <Table.Row>
-              <Table.HeaderCell colSpan='4'>
-                <AddPlayer/>
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Footer> 
-        </Table>
-      </div>
-      } 
-      </div>
-    )
-  }
-};
+const Roster = ({ isLoggedIn }) => (
+  <div>
+    {isLoggedIn ? 
+      <div>
+        <Navbar />
+        <RosterTable />
+      </div> : <Login /> }  
+  </div>
+);
 
 const mapState = (state) => {
   return {
-    user: state.user,
-    players: state.players
-  }
+    isLoggedIn: !!state.user.success,
+  };
 };
 
-const mapDispatch = { fetchPlayers, addPlayer, deletePlayer  };
+const mapDispatch = null;
+
 
 export default connect(mapState, mapDispatch)(Roster);

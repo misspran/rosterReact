@@ -22,6 +22,7 @@ const Login = (props) => {
                 icon="envelope outline"
                 iconPosition="left"
                 placeholder="E-mail address"
+                label="Email"
                 name="email"
                 type="text"
                 required
@@ -32,8 +33,10 @@ const Login = (props) => {
                 icon="lock"
                 iconPosition="left"
                 placeholder="Password"
+                label="Password"
                 name="password"
                 type="password"
+                
                 required
                 error={error}
               />
@@ -48,7 +51,7 @@ const Login = (props) => {
             content="Invalid email or password. Please create account if you're not yet a user."
           /> : <div />}
           <Message>
-            Don't have an account? <Link to="/register"> Sign Up!</Link>
+            Don't have an account? <Link to="/register"> Register!</Link>
           </Message>
         </Grid.Column>
       </Grid>

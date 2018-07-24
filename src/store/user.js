@@ -17,7 +17,7 @@ export const login = (email, password) => async (dispatch) => {
     res = await axios.post('https://players-api.developer.alchemy.codes/api/login', { email, password });
     await localStorage.setItem('Authorization', res.data.token);
     await dispatch(loginUser(res.data));
-    history.push('/home');
+    history.push('/roster');
   } catch (err) {
     return dispatch(loginUser({ error: err }));
   }
