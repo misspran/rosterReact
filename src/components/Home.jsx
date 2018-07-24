@@ -17,10 +17,10 @@ const Home = ({isLoggedIn}) =>  (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.success,
-  }
-}
+  };
+};
 
-const mapDispatch = null
+const mapDispatch = null;
 
 
 export default connect(mapState, mapDispatch)(Home);

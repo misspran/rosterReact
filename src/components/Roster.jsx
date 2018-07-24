@@ -26,9 +26,9 @@ class Roster extends React.Component {
   }
   
   render () {
-    console.log
+    console.log(this.props)
     
-    const players = this.props.players.players
+    const players = this.props.players
     return (
       <div style={{padding: '1% 1% 1%'}}>
       {players? <DeletePlayer />: <div>
@@ -49,7 +49,7 @@ class Roster extends React.Component {
           <Table.Footer fullwidth="true">
             <Table.Row>
               <Table.HeaderCell colSpan='4'>
-                <AddPlayer {...this.props}/>
+                <AddPlayer/>
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer> 

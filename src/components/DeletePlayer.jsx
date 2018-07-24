@@ -10,48 +10,27 @@ const inlineStyle = {
   },
 };
 
-// const ModalWarning = () => (
-//   <Modal trigger={<Button icon labelPosition='left' primary size='medium'>
-//   <Icon name='user plus' /> Delete Player
-//   </Button>} closeIcon>
-//     <Modal.Header>Delete</Modal.Header>
-//     <Modal.Content image>
-//       <div className='image'>
-//         <Icon name='user delete' />
-//       </div>
-//       <Modal.Description>
-//         <p>This player have been deleted.</p>
-//       </Modal.Description>
-//     </Modal.Content>
-//     <Modal.Actions>
-//     <Button icon='check' content='Back to Roster' />
-//   </Modal.Actions>
-//   </Modal>
-// )
-
-
 class DeletePlayer extends Component {
   constructor (props){
     super (props);
-    this.state = {}
+    this.state = {
+      id: null,
+      modalOpen:false,
+    }
 
   }
-  deletePlayerSubmit = () => {
+  deletePlayerSubmit = async () => {
     if(this.props.user.token){
-      const { removePlayerSubmit } = this.props;
-      console.log(this.props.user.token)
-      let token = 'Bearer '.concat(this.props.user.token)
-      console.log(token)
-      this.props.deletePlayer(this.state.id, token)
+      let token = await 'Bearer '.concat(this.props.user.token)
       this.setState({modalOpen: false})
-      
+      this.props.deletePlayer(this.state.id, token)
     }
 
   }
   handleRadioChange = (e, { value }) => this.setState({ handedness: value })
 
 render() {
-  console.log(this.state)
+  console.log(this.props)
     const {players} = this.props
       return (
         <div style={{padding: '0% 0% 0%'}}>
@@ -65,8 +44,8 @@ render() {
     </Table.Header >
     <Table.Body>
         
-        {players.players.map( player => (
-        <Modal key={player.id} style={inlineStyle.modal} trigger={<Table.Row key={player.id} value={player.id} onClick={()=> this.setState({id: player.id, modalOpen:true})} closeicon="true" open={this.state.modalOpen}>
+        {players.map( player => (
+        <Modal key={player.id} style={inlineStyle.modal} trigger={<Table.Row key={player.id} value={player.id} onClick={()=> this.setState({id: player.id, modalOpen:!this.state.modalOpen})} closeicon="true" open={this.state.modalOpen}>
 
         <Table.Cell  key={player.first_name + player.last_name}>{player.first_name} {player.last_name}</Table.Cell>
         <Table.Cell key={player.rating}>{player.rating}</Table.Cell>

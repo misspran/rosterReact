@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from '../history';
 
 require('babel-polyfill');
 
@@ -10,9 +11,6 @@ const fetch = players => ({ type: FETCH_PLAYERS, players });
 const create = player => ({ type: CREATE_PLAYER, player });
 const remove = id => ({ type: DELETE_PLAYER, id });
 const intitialState = [];
-const arr = [1, 2, 3]
-const arrb = [4, ...arr];
-console.log(arr, arrb);
 
 export const fetchPlayers = token => (dispatch) => {
   if (token) {
@@ -26,7 +24,8 @@ export const fetchPlayers = token => (dispatch) => {
         Authorization: token,
       },
     })
-      .then(res => dispatch(fetch(res.data)))
+      .then(res => dispatch(fetch(res.data.players)))
+      .then(res=> console.log(res))
       .catch(err => console.error('Unsuccesful', err));
   }
 };

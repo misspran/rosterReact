@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react'
 import { connect } from 'react-redux';
 import { Button, Icon, Modal, Header, Image, Form, Checkbox } from 'semantic-ui-react';
 import { addPlayer } from '../store';
@@ -13,24 +14,32 @@ class AddPlayer extends Component {
   constructor (props){
     super (props);
     this.state = {}
+    
 
   }
-  handlePlayerSubmit = () => {
+  handlePlayerSubmit = async () => {
     
     console.log(this.state)
-    this.props.addPlayer(this.state, this.props.user.token)
+    const playerAdding = {first_name: this.state.first_name, last_name: this.state.last_name, rating: this.state.rating, handedness: this.state.handedness}
+    await this.props.addPlayer(playerAdding, this.props.user.token)
+    this.setState({modal:false})
+    
     
 
   }
+  handleOpen = () => this.setState({modal: true})
+
+  handleClose = () => this.setState({modal:false})
+
   handleRadioChange = (e, { value }) => this.setState({ handedness: value })
 
 render() {
       return (
         
-        <Modal style={inlineStyle.modal} trigger={
-          <Button floated='right' icon labelPosition='left' primary size='small'>
+        <Modal style={inlineStyle.modal} open={this.state.modal} onOpen={this.handleOpen} onClose={this.handleClose} trigger={
+          <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.handleOpen}>
           <Icon name='user plus' /> Add Player
-          </Button>
+          </Button> 
         } closeIcon>
     <Modal.Header>Add Player</Modal.Header>
     <Modal.Content image>
@@ -73,7 +82,7 @@ render() {
     </Form>
     </Modal.Content>
     <Modal.Actions>
-    <Button icon labelPosition='left' primary size='medium' onClick={this.handlePlayerSubmit}>
+    <Button icon labelPosition='left' primary size='medium' onClick={this.handlePlayerSubmit} >
     <Icon name='user plus' /> Submit Player
     </Button>
     </Modal.Actions>

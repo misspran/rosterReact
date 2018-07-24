@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from '../history';
+
 require('babel-polyfill');
 
 const LOGIN_USER = 'LOGIN_USER';
@@ -15,7 +16,6 @@ export const login = (email, password) => async (dispatch) => {
   try {
     res = await axios.post('https://players-api.developer.alchemy.codes/api/login', { email, password });
     await localStorage.setItem('Authorization', res.data.token);
-    await console.log(res.data, 'that data');
     await dispatch(loginUser(res.data));
     history.push('/home');
   } catch (err) {
@@ -26,9 +26,6 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     await history.push('/');
-    await dispatch(logoutUser());
-    //delete axios.defaults.headers;
-    //delete axios.defaults.headers.common;
     localStorage.removeItem('Authorization');
     dispatch(logoutUser());
   } catch (err) {
