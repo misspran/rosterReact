@@ -36,14 +36,10 @@ class AddPlayer extends Component {
   
 
 render() {
-  const options = [{ key: 'left', text: 'Left', value: 'left' }, { key: 'right', text: 'Right', value: 'right' }];
+  const { location } = this.props;
+  const options = [{ key: 'left', text: 'Left', value: 'left', name:'left' }, { key: 'right', text: 'Right', value: 'right', name:'right' }];
       return (
-        
-        <Modal style={inlineStyle.modal} open={this.state.modal} onOpen={this.handleOpen} onClose={this.handleClose} trigger={
-          <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.handleOpen} type="open">
-          <Icon name='user plus' /> Add Player
-          </Button> 
-        } closeIcon>
+        <Modal style={inlineStyle.modal} open={location.state.modal} onOpen={this.handleOpen} onClose={this.handleClose}>
     <Modal.Header>Add Player</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src='https://png.icons8.com/color/1600/table-tennis.png' />

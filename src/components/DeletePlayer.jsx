@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { Button, Icon, Modal, Header, Image, Table, Footer } from 'semantic-ui-react';
 import { deletePlayer } from '../store';
 import AddPlayer from './AddPlayer'
@@ -72,7 +73,18 @@ render() {
 <Table.Footer fullwidth="true">
     <Table.Row>
       <Table.HeaderCell colSpan='4'>
-      <AddPlayer/>
+      
+        <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.handleOpen} type="open">
+        
+        <Icon name='user plus' /> Add Player
+        <Link to={
+          {pathname: '/player/new',
+          // this is the trick!
+          state: { modal: true }}
+        }>
+        </Link>
+        </Button> 
+     
       </Table.HeaderCell>
     </Table.Row>
   </Table.Footer> 

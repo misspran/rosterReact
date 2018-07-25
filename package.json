@@ -7,7 +7,8 @@
     "build": "cross-env NODE_ENV=production parcel build index.html --public-url && webpack",
     "e2e": "cypress open",
     "lint:js": "eslint src/**/**/*.js src/**/**/*.jsx tests/**/**/*.js",
-    "lint:style": "stylelint src/**/**/*.css src/**/**/*.scss"
+    "lint:style": "stylelint src/**/**/*.css src/**/**/*.scss",
+    "test": "mocha tests/unit/*.spec.js --compilers js:babel-register"
   },
   "dependencies": {
     "axios": "^0.18.0",
