@@ -27,9 +27,9 @@ class Register extends React.Component {
     const email = evt.target.email.value;
     const password = evt.target.password.value;
     const confirmPassword = evt.target.confirm_password.value;
-   await signupSubmit(firstName, lastName, email, password, confirmPassword)
-   await loginSubmit(email, password)
-   history.push('/roster');
+   signupSubmit(firstName, lastName, email, password, confirmPassword)
+   //loginSubmit(email, password)
+   //history.push('/roster');
 
   }
   errorWarning = () =>{
@@ -143,13 +143,11 @@ class Register extends React.Component {
 const mapState = () => ({ message: 'Sign up' });
 const mapDispatch = (dispatch) => {
   return {
-    signupSubmit: (firstName, lastName, email, password, confirmPassword) => {
+    signupSubmit: async (firstName, lastName, email, password, confirmPassword) => {
       let user = {first_name: firstName, last_name: lastName, email: email, password: password, confirm_password: confirmPassword}
-      dispatch(createUser(user));
-    },
-    loginSubmit: (email, password) =>{
-      let loginUser = {email: email, password: password}
-      dispatch(login(loginUser))
+      await dispatch(createUser(user));
+      dispatch(login(email, password));
+      history.push('/roster')
     }
 
   }

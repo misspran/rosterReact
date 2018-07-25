@@ -26,7 +26,6 @@ export const fetchPlayers = token => (dispatch) => {
       },
     })
       .then(res => dispatch(fetch(res.data.players)))
-      .then(res => console.log(res))
       .catch(err => console.error('Unsuccesful', err));
   }
 };

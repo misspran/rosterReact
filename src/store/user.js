@@ -11,26 +11,20 @@ const defaultUser = {};
 const loginUser = user => ({ type: LOGIN_USER, user });
 const logoutUser = () => ({ type: LOGOUT_USER });
 
-export const login = (email, password) => async (dispatch) => {
-  let res;
-  try {
-    res = await axios.post('https://players-api.developer.alchemy.codes/api/login', { email, password });
-    await localStorage.setItem('Authorization', res.data.token);
-    await dispatch(loginUser(res.data));
-    history.push('/roster');
-  } catch (err) {
-    return dispatch(loginUser({ error: err }));
-  }
-};
+export const login = (email, password) => dispatch =>
+  axios.post('https://players-api.developer.alchemy.codes/api/login', { email, password })
+    .then((res) => {
+      localStorage.setItem('Authorization', res.data.token);
+      dispatch(loginUser(res.data));
+      history.push('/roster');
+    })
+    .catch(err =>
+      console.error(err));
 
-export const logout = () => async (dispatch) => {
-  try {
-    await history.push('/');
-    localStorage.removeItem('Authorization');
-    dispatch(logoutUser());
-  } catch (err) {
-    console.error(err);
-  }
+export const logout = (dispatch) => {
+  history.push('/login');
+  localStorage.removeItem('Authorization');
+  dispatch(logoutUser());
 };
 
 export default function reducer(state = defaultUser, action) {

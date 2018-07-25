@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { login } from '../store';
+import { login } from '../store/user';
 import history from '../history';
 
 const CREATE_USER = 'CREATE_USER';
@@ -15,12 +15,7 @@ export default function reducer(users = [], action) {
   }
 }
 
-export const createUser = user => async (dispatch) => {
-  let res;
-  try {
-    await axios.post('https://players-api.developer.alchemy.codes/api/user', user);
-    dispatch(create(res.data));  
-  } catch (err) {
-    console.error(`Creating user: ${user} unsuccesful`, err);
-  }
-};
+export const createUser = user => dispatch =>
+  axios.post('https://players-api.developer.alchemy.codes/api/user', user)
+    .then(res => dispatch(create(res.data)))
+    .catch(err => console.error(`Creating user: ${user} unsuccesful`, err));

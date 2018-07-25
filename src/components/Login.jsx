@@ -36,7 +36,7 @@ const Login = (props) => {
                 label="Password"
                 name="password"
                 type="password"
-                
+
                 required
                 error={error}
               />
@@ -59,18 +59,18 @@ const Login = (props) => {
   );
 };
 
-const mapLogin = (state) => ({
-    error: state.user.error,
-  });
+const mapLogin = state => ({
+  error: state.user.error,
+});
 
-const mapDispatch = (dispatch) => ({
-    handleSubmit(evt) {
-      evt.preventDefault();
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      dispatch(login(email, password)); 
-    },
-  });
+const mapDispatch = dispatch => ({
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const email = evt.target.email.value;
+    const password = evt.target.password.value;
+    dispatch(login(email, password));
+  },
+});
 
 export default connect(mapLogin, mapDispatch)(Login);
 
