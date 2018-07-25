@@ -1,6 +1,5 @@
 ## Game Management Platform
 
-
 ## Required User Stories
 - As a user when I navigate to '/' then I should see a home page with login and registration links.
 - As a user when I navigate to '/register' then I should a registration page with fields for (first_name, last_name, email, password, confirm_password)
@@ -15,10 +14,19 @@
 - As a user I want to be able to log out of my account
 - As a user I want to have clear concise error messages when I can't login, add a player, or delete a player
 
+## Bonus
+Other factors that we take into account in the assessment.
+- Experience in the stack. (Things don't have to be perfect, if this is your first react experience. We understand)
+- UX/UI (Color schemes, an eye for layout and design, animations and transitions. Build this project as if someone would use it.)
+- Tests (The project has high level end-to-end tests but unit and component level tests are up to you. Automated tests are extremely important.)
+- Honest feedback on this assessment.
+
 ## Setup
-- git clone this repository to your favorite directory
 - npm install
 - npm start
+- npm run e2e (For Cypress Testing)
+- npm run lint:js
+- npm run lint:styles
 
 ## Success
 This test uses cypress to test user interactions, it requires that certain text, css elements, or urls be present.
@@ -28,17 +36,6 @@ To see what tests are passing and why run: (Make sure your dev server is already
 uses ESLint and StyleLint to enforce rules outlined in .eslintrc and .stylelintrc. To check your styles against these guidelines run:
 - npm run lint:js
 - npm run lint:styles
-
-A passing assessment is when all cypress tests are passing and the lint commands return no errors. Reach out to the team if you need help to get there.
-
-After all tests pass, run the app in dev directly against the API url and QA the user experience.
-
-## Bonus
-Other factors that we take into account in the assessment.
-- Experience in the stack. (Things don't have to be perfect, if this is your first react experience. We understand)
-- UX/UI (Color schemes, an eye for layout and design, animations and transitions. Build this project as if someone would use it.)
-- Tests (The project has high level end-to-end tests but unit and component level tests are up to you. Automated tests are extremely important.)
-- Honest feedback on this assessment.
 
 ## API details
 The API is currently available here. https://players-api.developer.alchemy.codes/

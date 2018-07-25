@@ -3,16 +3,16 @@ import history from '../history';
 
 require('babel-polyfill');
 
-const FETCH_PLAYERS = 'FETCH_PLAYERS';
-const CREATE_PLAYER = 'CREATE_PLAYER';
-const DELETE_PLAYER = 'DELETE_PLAYER';
-
+export const FETCH_PLAYERS = 'FETCH_PLAYERS';
+export const CREATE_PLAYER = 'CREATE_PLAYER';
+export const DELETE_PLAYER = 'DELETE_PLAYER';
+// workaround for CORS issue using axios should be removed after development stage.
 const CORSWorkAround = 'https://cors-anywhere.herokuapp.com/';
 
-const fetch = players => ({ type: FETCH_PLAYERS, players });
-const create = player => ({ type: CREATE_PLAYER, player });
-const remove = id => ({ type: DELETE_PLAYER, id });
-const intitialState = [];
+export const fetch = players => ({ type: FETCH_PLAYERS, players });
+export const create = player => ({ type: CREATE_PLAYER, player });
+export const remove = id => ({ type: DELETE_PLAYER, id });
+export const intitialState = [];
 
 export const fetchPlayers = token => (dispatch) => {
   if (token) {

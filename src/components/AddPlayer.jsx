@@ -36,7 +36,7 @@ class AddPlayer extends Component {
   
 
 render() {
-  const options = [{ key: 'left', text: 'Left', value: 'left' }, { key: 'right', text: 'Right', value: 'right' }];
+  const options = [{ key: 'left', text: 'Left', value: 'left', name:'left' }, { key: 'right', text: 'Right', value: 'right', name:'right' }];
       return (
         
         <Modal style={inlineStyle.modal} open={this.state.modal} onOpen={this.handleOpen} onClose={this.handleClose} trigger={
