@@ -1,4 +1,9 @@
-## Game Management Platform
+## Game Management Platform Notes (What else could use work on)
+- Fix mock history issue for Mocha.
+- Write more unit tests, Enzyme React component testing, ect..
+- More form validation.
+- More error handling.
+- AddPlayer component is currently a modal. When accessing through route '/player/new' modal by default is closed until button is clicked as button is embeded wiht default state closed in Roster component & DeletePlayer component. Somehow pass through state when accessed through a URL for AddPlayer to start at modal open. Other workaround, seperate form component, embed it into modal, route will be directed to form component directly instead. 
 
 
 ## Required User Stories
