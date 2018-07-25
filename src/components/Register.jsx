@@ -18,9 +18,8 @@ class Register extends React.Component {
       }; 
   }
 
-  onSignupSubmit = async (evt) => {
+  onSignupSubmit = (evt) => {
     evt.preventDefault();
-    console.log(this.state)
     const { signupSubmit, loginSubmit } = this.props;
     const firstName = evt.target.first_name.value;
     const lastName = evt.target.last_name.value;
