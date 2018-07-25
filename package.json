@@ -7,10 +7,13 @@
     "build": "cross-env NODE_ENV=production parcel build index.html --public-url && webpack",
     "e2e": "cypress open",
     "lint:js": "eslint src/**/**/*.js src/**/**/*.jsx tests/**/**/*.js",
-    "lint:style": "stylelint src/**/**/*.css src/**/**/*.scss"
-    
+    "lint:style": "stylelint src/**/**/*.css src/**/**/*.scss",
+    "test": "mocha \"tests/unit/*.spec.js\" --require babel-polyfill --require babel-register"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/polyfill": "^7.0.0-beta.54",
+    "@babel/register": "^7.0.0-beta.54",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
@@ -19,6 +22,7 @@
     "cypress": "^3.0.2",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
+    "mocha": "^5.2.0",
     "parcel-bundler": "^1.9.7",
     "path": "^0.12.7",
     "react": "^16.4.1",
