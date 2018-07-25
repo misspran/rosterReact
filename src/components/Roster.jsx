@@ -6,19 +6,17 @@ import Login from './Login';
 
 const Roster = ({ isLoggedIn }) => (
   <div>
-    {isLoggedIn ? 
+    {isLoggedIn ?
       <div>
         <Navbar />
         <RosterTable />
-      </div> : <Login /> }  
+      </div> : <Login /> }
   </div>
 );
 
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.user.success,
-  };
-};
+const mapState = state => ({
+  isLoggedIn: !!state.user.success,
+});
 
 const mapDispatch = null;
 

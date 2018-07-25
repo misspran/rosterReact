@@ -38,21 +38,21 @@ describe('Players Store', () => {
       });
     });
   });
+});
 
-  describe('Reducers', () => {
-    describe('players reducer', () => {
-        it('should return the initial state', () => {
-          expect(reducer(undefined, [])).toEqual([])
-        });
+describe('Reducers', () => {
+  describe('players reducer', () => {
+    it('should return the initial state', () => {
+      expect(reducer(undefined, [])).toEqual([]);
     });
-    describe('reduces on FETCH_PLAYERS action', () => {
-      it('dispatch an action to fetch players', () => {
-
-        const nextState = reducer([], { type: 'FETCH_PLAYERS', PLAYERS });
-        assert.equal(nextState, PLAYERS);
-      });
+  });
+  describe('reduces on FETCH_PLAYERS action', () => {
+    it('dispatch an action to fetch players', () => {
+      const nextState = reducer([], { type: 'FETCH_PLAYERS', PLAYERS });
+      assert.equal(nextState, PLAYERS);
     });
-    describe('reduces on ADD_PLAYERS action', () => {
+  });
+  describe('reduces on ADD_PLAYERS action', () => {
     it('should dispatch an action to add player ', () => {
       const nextState = reducer([{
         first_name: 'Caleb',
@@ -61,12 +61,12 @@ describe('Players Store', () => {
         rating: 523,
       }], { type: 'ADD_PLAYERS', PLAYER });
       assert.equal(nextState, PLAYERS);
-      });
     });
-    describe('reduces on DELETE_PLAYERS action', () => {
-        it('should dispatch an action to delete player ', () => {
-        const nextState = reducer([], { type: 'DELETE_PLAYERS', PLAYER });
-        assert.equal(nextState, PLAYERS);
-        });
+  });
+  describe('reduces on DELETE_PLAYERS action', () => {
+    it('should dispatch an action to delete player ', () => {
+      const nextState = reducer([], { type: 'DELETE_PLAYERS', PLAYER });
+      assert.equal(nextState, PLAYERS);
     });
+  });
 });
