@@ -26,8 +26,8 @@ describe('Add player page', () => {
     cy.get('input[name="first_name"]').type('Tom');
     cy.get('input[name="last_name"]').type('Riddle');
     cy.get('input[name="rating"]').type('10');
-    cy.get('options[name="handedness"]').select('Right');
-    cy.get('#create').click();
+    cy.get('input[name="checkboxRadioGroup"]').check({ force: true }).should('be.checked') ;
+    cy.get('button[name="create"]').click();
     cy.url().should('eq', 'http://localhost:3000/roster');
     cy.contains('Tom');
   });

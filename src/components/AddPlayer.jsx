@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react'
 import { connect } from 'react-redux';
-import { Button, Icon, Modal, Header, Image, Form, Dropdown } from 'semantic-ui-react';
+import { Button, Icon, Modal, Header, Image, Form, Checkbox, Label } from 'semantic-ui-react';
 import { addPlayer } from '../store';
 
 const inlineStyle = {
@@ -32,11 +32,9 @@ class AddPlayer extends Component {
 
   handleClose = () => this.setState({modal:false})
 
-  handleSelectChange = (e, { value }) => this.setState({ handedness: value })
-  
+  handleRadioChange = (e, { value }) => this.setState({ handedness: value })
 
 render() {
-  const options = [{ key: 'left', text: 'Left', value: 'left' }, { key: 'right', text: 'Right', value: 'right' }];
       return (
         
         <Modal style={inlineStyle.modal} open={this.state.modal} onOpen={this.handleOpen} onClose={this.handleClose} trigger={
@@ -52,21 +50,44 @@ render() {
         top: '20%'
       }}>
       <Form.Group widths='equal'>
-        <Form.Input stretch="true" label='First Name' name='first_name' type='text' placeholder='First name' value={this.state.first_name} onChange={evt => this.setState({ first_name: evt.target.value})} required />
-        <Form.Input stretch="true" label='Last Name' name='last_name' type='text' placeholder='Last name' onChange={evt => this.setState({ last_name: evt.target.value})} required/>
+        <Form.Input name="first_name" stretch="true" label='First Name' type='text' placeholder='First name' value={this.state.first_name} onChange={evt => this.setState({ first_name: evt.target.value})} required />
+        <Form.Input name="last_name" stretch="true" label='Last Name' type='text' placeholder='Last name' onChange={evt => this.setState({ last_name: evt.target.value})} required/>
       </Form.Group>
       <Form.Group>
-      <Form.Input stretch="true" label='Rating' name='rating' type='number' placeholder='Rating' onChange={evt => this.setState({ rating: evt.target.value })}/>
+      <Form.Input name="rating" stretch="true" label='Rating' type='number' placeholder='Rating' onChange={evt => this.setState({ rating: evt.target.value })}/>
       </Form.Group>
       <Form.Group inline>
         <label>Handedness</label>
-        <Dropdown name='handedness' placeholder='Select' text={this.state.handedness} options={options} onSelect={this.handleSelectChange} color='violet'/>
+        <Form.Field >
+          <Checkbox
+            radio
+            label='Left'
+            name='checkboxRadioGroup'
+            value='left'
+            checked={this.state.handedness === 'left'}
+            onChange={this.handleRadioChange}
+          >
+            
+          </Checkbox>
+        </Form.Field>
+        <Form.Field>
+        
+          <Checkbox
+            radio
+            label="Right"
+            name='checkboxRadioGroup'
+            value='right'
+            checked={this.state.handedness === 'right'}
+            onChange={this.handleRadioChange}
+          >
+          </Checkbox>
+        </Form.Field>
       </Form.Group>
       
     </Form>
     </Modal.Content>
     <Modal.Actions>
-    <Button icon labelPosition='left' primary size='medium' onClick={this.handlePlayerSubmit} name='create'>
+    <Button icon labelPosition='left' primary size='medium' onClick={this.handlePlayerSubmit} name="create" >
     <Icon name='user plus' /> Submit Player
     </Button>
     </Modal.Actions>

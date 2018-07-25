@@ -15,7 +15,7 @@ class Roster extends React.Component {
   
   }
 
-  componentWillMount = () =>{
+  componentDidMount = () =>{
     if(this.props.user.token){
       localStorage.setItem('Authorization', this.props.user.token )
       let token = this.props.user.token;
