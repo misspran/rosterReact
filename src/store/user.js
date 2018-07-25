@@ -14,7 +14,6 @@ export const logoutUser = () => ({ type: LOGOUT_USER });
 export const login = (email, password) => dispatch =>
   axios.post('https://players-api.developer.alchemy.codes/api/login', { email, password })
     .then((res) => {
-      localStorage.setItem('Authorization', res.data.token);
       dispatch(loginUser(res.data));
       history.push('/roster');
     })
@@ -23,8 +22,7 @@ export const login = (email, password) => dispatch =>
 
 export const logout = (dispatch) => {
   history.push('/login');
-  localStorage.removeItem('Authorization');
-  dispatch(logoutUser());
+  dispatch(logoutUser({}));
 };
 
 export default function reducer(state = defaultUser, action) {
