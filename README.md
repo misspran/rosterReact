@@ -1,4 +1,5 @@
 ## Game Management Platform Notes (What else could use work on)
+- Remove CORS workaround in production code. 
 - Fix mock history issue for Mocha.
 - Write more unit tests, Enzyme React component testing, ect..
 - More form validation.
