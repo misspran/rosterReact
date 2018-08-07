@@ -46,7 +46,7 @@ export const addPlayer = (player, token) => dispatch => axios({
 
 export const deletePlayer = (id, token) => dispatch => axios({
   method: 'DELETE',
-  url: COORS+`https://players-api.developer.alchemy.codes/api/players/${id}`,
+  url: CORS+`https://players-api.developer.alchemy.codes/api/players/${id}`,
   data: id,
   headers: {
     Accept: 'application/json',
