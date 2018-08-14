@@ -11,16 +11,15 @@ export const create = player => ({ type: CREATE_PLAYER, player });
 export const remove = id => ({ type: DELETE_PLAYER, id });
 export const intitialState = [];
 
-const CORS = 'https://cors-anywhere.herokuapp.com/'
+//const CORS = 'https://cors-anywhere.herokuapp.com/' <---might not need this work around
 
 export const fetchPlayers = token => (dispatch) => {
   if (token) {
     return axios({
       method: 'GET',
-      url: CORS+'https://players-api.developer.alchemy.codes/api/players',
+      url:'https://players-api.developer.alchemy.codes/api/players',
       headers: {
         Accept: 'application/json',
-        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
         Authorization: token,
       },
@@ -32,11 +31,10 @@ export const fetchPlayers = token => (dispatch) => {
 
 export const addPlayer = (player, token) => dispatch => axios({
   method: 'POST',
-  url: CORS+'https://players-api.developer.alchemy.codes/api/players',
+  url: 'https://players-api.developer.alchemy.codes/api/players',
   data: player,
   headers: {
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
     Authorization: 'Bearer '.concat(token),
   },
@@ -46,11 +44,10 @@ export const addPlayer = (player, token) => dispatch => axios({
 
 export const deletePlayer = (id, token) => dispatch => axios({
   method: 'DELETE',
-  url: CORS+`https://players-api.developer.alchemy.codes/api/players/${id}`,
+  url: `https://players-api.developer.alchemy.codes/api/players/${id}`,
   data: id,
   headers: {
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
     Authorization: token,
   },
